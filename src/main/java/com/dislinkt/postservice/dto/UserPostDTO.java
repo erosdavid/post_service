@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @Getter
@@ -17,10 +18,17 @@ public class UserPostDTO {
     private String link;
     private String username;
     private Date postDate;
+    private Integer likeCount;
+    private Integer dislikeCount;
+    private List<CommentDTO> comments;
+
+
 
     public UserPostDTO(){
         this.postDate = new Date();
     }
+
+
 
 
 }
