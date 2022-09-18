@@ -1,5 +1,6 @@
 package com.dislinkt.postservice.controller;
 
+import com.dislinkt.postservice.dto.UserPostDTO;
 import com.dislinkt.postservice.model.UserPost;
 import com.dislinkt.postservice.service.UserPostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,17 @@ public class UserPostController {
     private UserPostService userPostService;
 
     @PostMapping("/saveUserPost")
-    public UserPost saveUserPost(@RequestBody UserPost userPost){
+    public UserPost saveUserPost(@RequestBody UserPostDTO userPostDTO){
+
+        UserPost userPost = new UserPost();
+        userPost.setPostText(userPostDTO.getPostText());
+        userPost.setPostDate(userPostDTO.getPostDate());
+        userPost.setUsername(userPostDTO.getUsername());
+        userPost.setPicture(userPost.getPicture());
+        userPost.setLink(userPost.getLink());
         return userPostService.saveUserPost(userPost);
+
+
     }
 
     @GetMapping("/getAllUserPosts")

@@ -6,8 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 public class UserPostDTO {
@@ -15,4 +16,11 @@ public class UserPostDTO {
     private String picture;
     private String link;
     private String username;
+    private Date postDate;
+
+    public UserPostDTO(){
+        this.postDate = new Date();
+    }
+
+
 }

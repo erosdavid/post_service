@@ -9,10 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -37,6 +34,9 @@ public class UserPost {
     @Column(name = "username", nullable = false)
     private String username;
 
+    @Column(name = "post_date", nullable = false)
+    private Date postDate;
+
     @JsonIgnore
     @OneToMany(mappedBy = "userPost", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<LikePost> likePosts;
@@ -48,6 +48,8 @@ public class UserPost {
     @JsonIgnore
     @OneToMany(mappedBy = "userPost", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comment> comments;
+
+
 
 
 
