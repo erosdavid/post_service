@@ -24,17 +24,28 @@ public class DislikePostService {
     @Autowired
     private LikePostRepository likePostRepository;
 
-    public DislikePost saveDislikePost(@RequestBody DislikePostDTO dislikePostDTO){
+    public int saveDislikePost(@RequestBody DislikePostDTO dislikePostDTO){
         DislikePost dislikePost = new DislikePost(dislikePostDTO);
+        List<DislikePost> dislikePosts = dislikePostRepository.findAll();
+        int dislikeStatus = 0;
+        for (DislikePost dislike : dislikePosts) {
+            boolean check1 = dislike.getUserPost().getId().equals(dislikePostDTO.getUserPostID());
+            boolean check2 = dislike.getUsername().equals(dislikePostDTO.getUsername());
+            if (check1 && check2) {
+                return -1;
+            }
+        }
         dislikePost.setUserPost(userPostRepository.findById(dislikePostDTO.getUserPostID()).orElse(null));
         List<LikePost> likePosts = likePostRepository.findAll();
         for (LikePost l : likePosts){
             if (dislikePost.getUsername().equals(l.getUsername()) && dislikePost.getUserPost().getId() == l.getUserPost().getId()){
                 likePostRepository.delete(l);
+                dislikeStatus = 1;
             }
         }
 
-        return dislikePostRepository.save(dislikePost);
+        dislikePostRepository.save(dislikePost);
+        return dislikeStatus;
     }
 
     public DislikePost deleteDislikePost(Long id){

@@ -24,8 +24,8 @@ public class UserPostController {
         userPost.setPostText(userPostDTO.getPostText());
         userPost.setPostDate(userPostDTO.getPostDate());
         userPost.setUsername(userPostDTO.getUsername());
-        userPost.setPicture(userPost.getPicture());
-        userPost.setLink(userPost.getLink());
+        userPost.setPicture(userPostDTO.getPicture());
+        userPost.setLink(userPostDTO.getLink());
         return userPostService.saveUserPost(userPost);
 
 
@@ -48,7 +48,7 @@ public class UserPostController {
             userPostDTO.setLikeCount(post.getLikePosts().size());
             userPostDTO.setDislikeCount(post.getDislikePosts().size());
             userPostDTO.setComments(new ArrayList<>());
-
+            userPostDTO.setId(post.getId());
 
             for (Comment comment : post.getComments()){
                 CommentDTO commentDTO = new CommentDTO();
