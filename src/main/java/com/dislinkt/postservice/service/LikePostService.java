@@ -24,17 +24,28 @@ public class LikePostService {
     @Autowired
     private DislikePostRepository dislikePostRepository;
 
-    public LikePost saveLikePost(@RequestBody LikePostDTO likePostDTO){
+    public int saveLikePost(@RequestBody LikePostDTO likePostDTO){
         LikePost likePost = new LikePost(likePostDTO);
+        List<LikePost> likePosts = likePostRepository.findAll();
+        int likeStatus = 0;
+        for (LikePost like : likePosts) {
+            boolean check1 = like.getUserPost().getId().equals(likePostDTO.getUserPostID());
+            boolean check2 = like.getUsername().equals(likePost.getUsername());
+            if (check1 && check2) {
+                return -1;
+            }
+        }
         likePost.setUserPost(userPostRepository.findById(likePostDTO.getUserPostID()).orElse(null));
         List<DislikePost> dislikePosts = dislikePostRepository.findAll();
         for (DislikePost d : dislikePosts){
             if (likePost.getUsername().equals(d.getUsername()) && likePost.getUserPost().getId() == d.getUserPost().getId()){
                 dislikePostRepository.delete(d);
+                likeStatus = 1;
             }
         }
 
-        return likePostRepository.save(likePost);
+        likePostRepository.save(likePost);
+        return likeStatus;
 
     }
 

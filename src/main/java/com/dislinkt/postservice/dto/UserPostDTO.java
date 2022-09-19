@@ -21,6 +21,7 @@ public class UserPostDTO {
     private Integer likeCount;
     private Integer dislikeCount;
     private List<CommentDTO> comments;
+    private Long id;
 
 
 

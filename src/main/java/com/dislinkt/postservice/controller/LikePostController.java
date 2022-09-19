@@ -20,7 +20,7 @@ public class LikePostController {
     private LikePostService likePostService;
 
     @PostMapping("/saveLikePost")
-    public LikePost saveLikePost(@RequestBody LikePostDTO likePostDTO){
+    public int saveLikePost(@RequestBody LikePostDTO likePostDTO){
         return likePostService.saveLikePost(likePostDTO);
     }
 

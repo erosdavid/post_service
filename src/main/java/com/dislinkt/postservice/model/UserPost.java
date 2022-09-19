@@ -25,6 +25,7 @@ public class UserPost {
     @Column(name = "post_text", nullable = false)
     private String postText;
 
+    @Lob
     @Column(name = "picture", nullable = true)
     private String picture;
 

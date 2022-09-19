@@ -19,7 +19,7 @@ public class DislikePostController {
     private DislikePostService dislikePostService;
 
     @PostMapping("/saveDislikePost")
-    public DislikePost saveDislikePost(@RequestBody DislikePostDTO dislikePostDTO){
+    public int saveDislikePost(@RequestBody DislikePostDTO dislikePostDTO){
         return dislikePostService.saveDislikePost(dislikePostDTO);
     }
 
