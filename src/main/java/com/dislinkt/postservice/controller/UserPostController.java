@@ -31,9 +31,20 @@ public class UserPostController {
 
     }
 
-    @GetMapping("/getAllUserPosts")
-    public List<UserPostDTO> getAllUserPosts(){
-        List<UserPost> userPosts = userPostService.getAllUserPosts();
+    @PutMapping("/getAllUserPosts")
+    public List<UserPostDTO> getAllUserPosts(@RequestBody List<String> usernames){
+        List<UserPost> userPosts = userPostService.getAllUserPosts(usernames);
+        return generateListDto(userPosts);
+    }
+
+    @GetMapping("/getAllPostsForUser/{username}")
+    public List<UserPostDTO> getAllUserPosts(@PathVariable String username){
+        List<String> usernames = new ArrayList<>();
+        usernames.add(username);
+        List<UserPost> userPosts = userPostService.getAllUserPosts(usernames);
+        return generateListDto(userPosts);
+    }
+    private List<UserPostDTO> generateListDto(List<UserPost> userPosts) {
         List<UserPostDTO> userPostDTOS = new ArrayList();
         for (UserPost post : userPosts){
             UserPostDTO userPostDTO = new UserPostDTO();
@@ -60,10 +71,7 @@ public class UserPostController {
             }
 
             userPostDTOS.add(userPostDTO);
-
-
         }
-
         return userPostDTOS;
     }
 }

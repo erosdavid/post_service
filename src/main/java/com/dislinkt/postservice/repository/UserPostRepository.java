@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface UserPostRepository extends JpaRepository<UserPost, Long> {
-    List<UserPost> findByUsernameIn(List<String> names);
+    List<UserPost> findByUsernameInOrderByPostDateDesc(List<String> names);
 }

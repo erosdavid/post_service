@@ -26,8 +26,8 @@ public class UserPostService {
 
     }
 
-    public List<UserPost> getAllUserPosts(){
-        return userPostRepository.findAll();
+    public List<UserPost> getAllUserPosts(List<String> usernames){
+        return userPostRepository.findByUsernameInOrderByPostDateDesc(usernames);
     }
 
 }
