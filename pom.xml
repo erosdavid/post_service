@@ -14,11 +14,7 @@
 	<name>post-service</name>
 	<description>Microservice for Posts</description>
 	<properties>
-		<maven.compiler.source>17</maven.compiler.source>
-        	<maven.compiler.target>17</maven.compiler.target>
-        	<java.version>17</java.version>
-        	<dcsa.tnt.version>0.0.1</dcsa.tnt.version>
-        	<dcsa.artifacttype>-SNAPSHOT</dcsa.artifacttype>
+        	<java.version>11</java.version>>
 	</properties>
 	<dependencies>
 
