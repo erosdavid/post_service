@@ -5,6 +5,8 @@ import com.dislinkt.postservice.dto.UserPostDTO;
 import com.dislinkt.postservice.model.Comment;
 import com.dislinkt.postservice.model.UserPost;
 import com.dislinkt.postservice.service.UserPostService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +19,11 @@ public class UserPostController {
     @Autowired
     private UserPostService userPostService;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserPostController.class);
+
     @PostMapping("/saveUserPost")
     public UserPost saveUserPost(@RequestBody UserPostDTO userPostDTO){
-
+        LOGGER.info("Adding new post from user " + userPostDTO.getUsername());
         UserPost userPost = new UserPost();
         userPost.setPostText(userPostDTO.getPostText());
         userPost.setPostDate(userPostDTO.getPostDate());
@@ -33,12 +37,14 @@ public class UserPostController {
 
     @PutMapping("/getAllUserPosts")
     public List<UserPostDTO> getAllUserPosts(@RequestBody List<String> usernames){
+        LOGGER.info("Getting posts from users " + usernames);
         List<UserPost> userPosts = userPostService.getAllUserPosts(usernames);
         return generateListDto(userPosts);
     }
 
     @GetMapping("/getAllPostsForUser/{username}")
     public List<UserPostDTO> getAllUserPosts(@PathVariable String username){
+        LOGGER.info("Getting posts from user " + username);
         List<String> usernames = new ArrayList<>();
         usernames.add(username);
         List<UserPost> userPosts = userPostService.getAllUserPosts(usernames);
